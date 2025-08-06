@@ -16,11 +16,11 @@ Begin by creating a new project directory and initializing it with `npm init`. T
 
 The next step is to install all the necessary packages:
 
-- **Webpack and Related Packages**: To bundle modules and serve the application in development mode.
-- **Loaders**: Required to process different file types like TypeScript, CSS, etc.
-- **Babel Presets**: To transpile modern JavaScript, React JSX, and TypeScript.
-- **React & React DOM**: Core libraries for building the UI.
-- **TypeScript and Type Definitions**: Enable type safety and modern development features.
+- **Webpack and Related Packages**: To bundle modules and serve the application in development mode.(webpack, webpack-cli, webpack-dev-server)
+- **Loaders**: Required to process different file types like TypeScript, CSS, etc.(babel-loader, style-loader, css-loader)
+- **Babel Presets**: To transpile modern JavaScript, React JSX, and TypeScript.(@babel/preset-env, @babel/preset-react, @babel/preset-react) 
+- **React & React DOM**: Core libraries for building the UI.(react, react-dom)
+- **TypeScript and Type Definitions**: Enable type safety and modern development features. (typescript)
 
 Dependencies were installed in logical groups based on purpose — first the build tools (webpack, loaders, presets), then the app libraries (React, ReactDOM), followed by development utilities (TypeScript and type definitions).
 
@@ -32,12 +32,46 @@ After installing the dependencies, the next step was to create the `webpack.conf
 
 This configuration includes:
 
-- **Entry Point**: Defines the starting file of the application.
+- **Entry Point**: Defines the starting file of the application. 
+- `entry: './src/index.js'`
 - **Output**: Specifies the directory and filename for the bundled code.
+- `output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/"
+    },`
 - **Resolve Options**: Handles file extensions and optional aliasing.
+- `resolve: {
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
+    },`
 - **Module Rules**: Declares loaders used to handle `.tsx`, `.css`, or other file types.
+- `module: {
+        rules: [
+            {
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"]
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            },
+        ]
+    },`
 - **Plugins**: Includes plugins like `HtmlWebpackPlugin` to manage HTML file injection.
+-  `plugins: [
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
+        })
+    ],`
 - **DevServer**: Enables live reloading, sets the port, and manages routing support using `historyApiFallback`.
+-  `devServer: {
+        historyApiFallback: true
+    }`
 
 Each section of the Webpack config was added step-by-step to ensure a modular and understandable build process.
 
@@ -73,6 +107,7 @@ This configuration ensures proper type checking and compatibility with Babel and
 Custom scripts were added to the `package.json` file:
 
 - **start**: Launches the development server with hot reloading enabled.
+- `"start": "webpack-dev-server --mode development --open --hot"`
 - **test**: Placeholder for future test scripts.
 
 The start script uses `webpack-dev-server` to serve the application during development with all the custom configuration in place.
@@ -103,6 +138,9 @@ This boilerplate provides full control over the frontend build pipeline. The pro
 This setup can now be extended further by adding testing libraries, state management solutions, or production-ready optimization techniques.
 
 ---
+
+#### While tools like Vite or Create React App offer quick scaffolding, setting up a React project manually with Webpack provides deeper understanding, full control over the configuration, and the flexibility to include only the dependencies you truly need.
+
 
 ## 👤 Author
 
