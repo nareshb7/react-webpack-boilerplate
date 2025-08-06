@@ -120,7 +120,7 @@ In this setup, loaders are the key to making Webpack understand and process vari
 
 - **Babel Loader**: Transpiles JavaScript, JSX, and TypeScript.
 - **CSS Loader** and **Style Loader**: Handles importing and injecting styles.
-- Additional loaders can be added as needed (e.g., file-loader, image-loader).
+- Additional loaders can be added as needed (e.g., `file-loader, image-loader`).
 
 Without appropriate loaders, Webpack cannot interpret file types beyond plain JavaScript.
 
