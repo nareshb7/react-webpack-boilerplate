@@ -33,21 +33,21 @@ After installing the dependencies, the next step was to create the `webpack.conf
 This configuration includes:
 
 - **Entry Point**: Defines the starting file of the application. 
-- `entry: './src/index.js'`
+  `entry: './src/index.js'`
 - **Output**: Specifies the directory and filename for the bundled code.
-- `output: {
+  `output: {
         path: path.resolve(__dirname, "dist"),
         publicPath: "/"
     },`
 - **Resolve Options**: Handles file extensions and optional aliasing.
-- `resolve: {
+  `resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
           alias: {
               pages: path.resolve(__dirname, "src/pages"),
           }
     },`
 - **Module Rules**: Declares loaders used to handle `.tsx`, `.css`, or other file types.
-- `module: {
+  `module: {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
@@ -66,13 +66,13 @@ This configuration includes:
         ]
     },`
 - **Plugins**: Includes plugins like `HtmlWebpackPlugin` to manage HTML file injection.
--  `plugins: [
+  `plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         })
     ],`
 - **DevServer**: Enables live reloading, sets the port, and manages routing support using `historyApiFallback`.
--  `devServer: {
+  `devServer: {
         historyApiFallback: true
     }`
 
