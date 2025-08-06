@@ -41,7 +41,10 @@ This configuration includes:
     },`
 - **Resolve Options**: Handles file extensions and optional aliasing.
 - `resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx"]
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
+          alias: {
+              pages: path.resolve(__dirname, "src/pages"),
+          }
     },`
 - **Module Rules**: Declares loaders used to handle `.tsx`, `.css`, or other file types.
 - `module: {
